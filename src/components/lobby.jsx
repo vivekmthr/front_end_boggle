@@ -70,7 +70,7 @@ const Lobby = (props) => {
   const [gridshow, setGShow] = useState(false);
   const [endgame, setEndgame] = useState(false);
   const [words, setWords] = useState("");
-  const ENDPOINT = `bogglebackend.netlify.app/rooms`;
+  const ENDPOINT = `https://git.heroku.com/backend-boggle.git/rooms`;
   const classes = useStyles();
   let score_array = [];
   const ordered_scores = [];

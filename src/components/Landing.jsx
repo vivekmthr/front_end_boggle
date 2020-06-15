@@ -21,7 +21,7 @@ const Landing = (props) => {
     const [time, setTime] = useState(60);
 
 
-    const SERVER_PORT = "bogglebackend.netlify.app"
+    const SERVER_PORT = "https://git.heroku.com/backend-boggle.git"
 
 
 
