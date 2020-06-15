@@ -70,7 +70,7 @@ const Lobby = (props) => {
   const [gridshow, setGShow] = useState(false);
   const [endgame, setEndgame] = useState(false);
   const [words, setWords] = useState("");
-  const ENDPOINT = `https://git.heroku.com/backend-boggle.git/rooms`;
+  const ENDPOINT = `https://backend-boggle.herokuapp.com/rooms`;
   const classes = useStyles();
   let score_array = [];
   const ordered_scores = [];
@@ -434,7 +434,7 @@ const Lobby = (props) => {
         </div>
       );
     }
-    return <div>code: {room} {leaderboard()}</div>
+    return <div>code:{room} {leaderboard()}</div>
   };
 
   return (

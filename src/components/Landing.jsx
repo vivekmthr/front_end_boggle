@@ -21,7 +21,7 @@ const Landing = (props) => {
     const [time, setTime] = useState(60);
 
 
-    const SERVER_PORT = "https://git.heroku.com/backend-boggle.git"
+    const SERVER_PORT = "https://backend-boggle.herokuapp.com"
 
 
 
@@ -59,7 +59,7 @@ const Landing = (props) => {
                     <Form.Label>Game Code</Form.Label>
                     <Form.Control onChange={(e) => { setCode(e.target.value) }} />
                 </Form.Group>
-                <Link onClick={e => (!name || !code) ? e.preventDefault() : null} to={`/lobby?name=${name}&Time=${time}&room=${code}`}>
+                <Link onClick={e => (!name || !code) ? e.preventDefault() : null} to={`/lobby?name=${name}&room=${code}`}>
                     <button className={'button mt-20'} >Join Game</button>
                 </Link>
             </Form>
