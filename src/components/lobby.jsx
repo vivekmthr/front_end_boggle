@@ -56,7 +56,7 @@ const Lobby = (props) => {
   let { Time } = queryString.parse(window.location.search);
   //DECLARATIONS OF STATE NECESSARY THINGS
   const { time, start, pause, reset, isRunning } = useTimer({
-    initialTime: Time,
+    initialTime: 120,
     timerType: "DECREMENTAL",
   });
   const [name, setName] = useState("");
@@ -349,7 +349,6 @@ const Lobby = (props) => {
               </Grid>
             </Grid>
           </Grid>
-          <br/>
         </div>
       );
     }
