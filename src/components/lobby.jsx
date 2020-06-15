@@ -356,10 +356,9 @@ const Lobby = (props) => {
   const render_timer = () => {
     if (gridshow) {
       return (
-        <div>
-          <h3>..Find Words!!</h3>
-          <h4>Seconds Left: {time}</h4>
-        </div>
+         <ThemeProvider theme={theme}>
+         <Typography variant="h3">Find Words!! Seconds Left: {time}</Typography>
+       </ThemeProvider>
       );
     } else {
       return;
@@ -444,12 +443,12 @@ const Lobby = (props) => {
           <Grid container justify="center" spacing={4}>
             <Grid item>{render_code()}</Grid>
           </Grid>
-          <br/>
         </Grid>
 
         <Grid>{display_scores()}
         <br/></Grid>
-        <Grid container spacing={2}>
+        
+        <Grid container>
         <Grid item xs={12}>
           <Grid
             container

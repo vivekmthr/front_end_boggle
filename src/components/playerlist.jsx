@@ -43,6 +43,7 @@ if(!props.gridshow && props.scores.length === 0){
                     </Grid>
                 </Grid>
             </Paper>
+            <br/>
         </Grid>
     );
 }
