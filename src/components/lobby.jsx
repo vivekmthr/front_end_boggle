@@ -349,6 +349,7 @@ const Lobby = (props) => {
               </Grid>
             </Grid>
           </Grid>
+          <br/>
         </div>
       );
     }
