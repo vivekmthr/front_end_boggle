@@ -56,7 +56,7 @@ const Lobby = (props) => {
   let { Time } = queryString.parse(window.location.search);
   //DECLARATIONS OF STATE NECESSARY THINGS
   const { time, start, pause, reset, isRunning } = useTimer({
-    initialTime: 10,
+    initialTime: Time,
     timerType: "DECREMENTAL",
   });
   const [name, setName] = useState("");
