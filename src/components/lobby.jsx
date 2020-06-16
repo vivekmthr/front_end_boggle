@@ -83,10 +83,10 @@ const Lobby = (props) => {
   const [showgrid, setshowgrid] = useState(false);
   const [endgame, setEndgame] = useState(false);
   const [words, setWords] = useState("");
-  const [endtime, setendtime]  = useState(10);
+  const [endtime, setendtime]  = useState(120);
   let final_time = 0;
-  //const ENDPOINT = `https://backend-boggle.herokuapp.com/rooms`;
-  const ENDPOINT = `http://localhost:9000/rooms`;
+   const ENDPOINT = `https://backend-boggle.herokuapp.com/rooms`;
+  // const ENDPOINT = `http://localhost:9000/rooms`;
   const classes = useStyles();
   let [isBlocking, setIsBlocking] = useState(true);
   
@@ -289,7 +289,7 @@ const Lobby = (props) => {
                 {scores.map((player) => (
                   <li>
                     <OverlayTrigger
-                    trigger="click"
+                    trigger="hover"
                     triger= "focus"
                     
                       
@@ -498,7 +498,7 @@ const Lobby = (props) => {
     }
     return (
       <div>
-       host:{host} code:{room} {leaderboard()}
+       host-{host} code-{room} (Seeing an old page? Please Refresh) {leaderboard()}
       </div>
     );
   };
