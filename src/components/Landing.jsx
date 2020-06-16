@@ -17,7 +17,8 @@ const Landing = (props) => {
   const [showC, setShowC] = useState(false);
   const [time, setTime] = useState(60);
 
-  const SERVER_PORT = "https://backend-boggle.herokuapp.com";
+//   const SERVER_PORT = "https://backend-boggle.herokuapp.com";
+const SERVER_PORT = `http://localhost:9000`
 
   const createGame = async () => {
     if (name !== "") {
@@ -25,7 +26,7 @@ const Landing = (props) => {
       console.log(new_code);
       if (new_code !== "") {
         props.history.push(
-          `/lobby?name=${name}&Time=${time}&room=${new_code.data}`
+          `/lobby?name=${name}&room=${new_code.data}`
         );
       }
     }
@@ -88,16 +89,6 @@ const Landing = (props) => {
             />
             <Form.Text className="text-muted"></Form.Text>
           </Form.Group>
-          <Form.Label className="my-1 mr-2">Game Length (seconds)</Form.Label>
-          <Form.Control
-            as="select"
-            defaultValue="Choose..."
-            onChange={(e) => {
-              setTime(e.target.value);
-            }}
-          >
-            <option>120</option>
-          </Form.Control>
           <Button onClick={onClick}>Create Game</Button>
         </Form>
       );
