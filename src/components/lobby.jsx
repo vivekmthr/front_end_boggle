@@ -498,7 +498,7 @@ const Lobby = (props) => {
     }
     return (
       <div>
-       host-{host} code-{room} (Seeing an old page? Please Refresh) {leaderboard()}
+       host-{host} code-{room} (Seeing an old page? Refresh) {leaderboard()}
       </div>
     );
   };
