@@ -83,10 +83,10 @@ const Lobby = (props) => {
   const [showgrid, setshowgrid] = useState(false);
   const [endgame, setEndgame] = useState(false);
   const [words, setWords] = useState("");
-  const [endtime, setendtime]  = useState(120);
-  let final_time = 0;
-   const ENDPOINT = `https://backend-boggle.herokuapp.com/rooms`;
-  // const ENDPOINT = `http://localhost:9000/rooms`;
+  const [endtime, setendtime]  = useState(20);
+  let final_time = 20;
+  //  const ENDPOINT = `https://backend-boggle.herokuapp.com/rooms`;
+  const ENDPOINT = `http://localhost:9000/rooms`;
   const classes = useStyles();
   let [isBlocking, setIsBlocking] = useState(true);
   
@@ -191,7 +191,9 @@ const Lobby = (props) => {
   };
 
   const order_scores = () => {
+    score_array.length = 0;
     for (let i = 0; i < scores.length; i++) {
+      console.log(score_array);
       score_array.push(total_score1(scores[i].words));
     }
     score_array.sort(function (a, b) {
@@ -273,7 +275,7 @@ const Lobby = (props) => {
   //DISPLAYS SCORES
   const display_scores = () => {
     if (gridshow === false && scores.length > 0) {
-      console.log(score_array)
+      //console.log(score_array)
       return (
         <div>
           <Grid container>
@@ -588,14 +590,14 @@ const Lobby = (props) => {
                        onChange= {(e) => {
                       final_time = e.target.value
                         console.log(final_time)
-    currentSocket.emit('setting_time', (final_time))
+    currentSocket.emit('setting_time', ({host: name, time: final_time}))
                       }}
                           as="select"
                           className="mr-sm-2"
                           id="inlineFormCustomSelect"
                           custom
                         >
-                          <option value="120">Set Time...(seconds)</option>
+                          <option value="20">Set Time...seconds (host only)</option>
                           <option value="60">60</option>
                           <option value="120">120</option>
                           <option value="180">180</option>
