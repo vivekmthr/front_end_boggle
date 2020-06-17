@@ -17,8 +17,8 @@ const Landing = (props) => {
   const [showC, setShowC] = useState(false);
   const [time, setTime] = useState(60);
 
-//  const SERVER_PORT = "https://backend-boggle.herokuapp.com";
-const SERVER_PORT = `http://localhost:9000`
+ const SERVER_PORT = "https://backend-boggle.herokuapp.com";
+// const SERVER_PORT = `http://localhost:9000`
 
   const createGame = async () => {
     if (name !== "") {

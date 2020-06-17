@@ -85,8 +85,8 @@ const Lobby = (props) => {
   const [words, setWords] = useState("");
   const [endtime, setendtime]  = useState(20);
   let final_time = 20;
-  //  const ENDPOINT = `https://backend-boggle.herokuapp.com/rooms`;
-  const ENDPOINT = `http://localhost:9000/rooms`;
+   const ENDPOINT = `https://backend-boggle.herokuapp.com/rooms`;
+  // const ENDPOINT = `http://localhost:9000/rooms`;
   const classes = useStyles();
   let [isBlocking, setIsBlocking] = useState(true);
   
