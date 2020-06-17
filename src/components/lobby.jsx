@@ -83,10 +83,10 @@ const Lobby = (props) => {
   const [showgrid, setshowgrid] = useState(false);
   const [endgame, setEndgame] = useState(false);
   const [words, setWords] = useState("");
-  const [endtime, setendtime]  = useState(20);
-  let final_time = 20;
-   const ENDPOINT = `https://backend-boggle.herokuapp.com/rooms`;
-  // const ENDPOINT = `http://localhost:9000/rooms`;
+  const [endtime, setendtime]  = useState(120);
+  let final_time = 120;
+  //  const ENDPOINT = `https://backend-boggle.herokuapp.com/rooms`;
+  const ENDPOINT = `http://localhost:9000/rooms`;
   const classes = useStyles();
   let [isBlocking, setIsBlocking] = useState(true);
   
@@ -242,7 +242,7 @@ const Lobby = (props) => {
             ) : (
               ""
             )}
-            {score === score_array[2] && score !== score_array[1] ? (
+            {score === score_array[2] ? (
               <img
                 src="https://img.icons8.com/ios-filled/100/000000/medal-third-place.png"
                 alt=""
@@ -346,7 +346,7 @@ const Lobby = (props) => {
     //console.log(grid[0])
     if (gridshow === true || showgrid === true) {
       return (
-        <div>
+        <div className="background">
           {" "}
           <Grid container className={classes.root} spacing={2}>
             <Grid item xs={12}>
@@ -508,6 +508,7 @@ const Lobby = (props) => {
 
 
   return (
+    <div className="lobby">
     <Container fixed>
       <Grid item xs={12}>
         <Grid container justify="center" spacing={4}>
@@ -656,6 +657,7 @@ const Lobby = (props) => {
         }
       />
     </Container>
+    </div>
   );
 };
 
