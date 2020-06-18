@@ -23,8 +23,8 @@ const Landing = (props) => {
   let code = "";
   const [modalShow, setModalShow] = useState(false);
   const [modalShow1, setModalShow1] = useState(false);
-  // const SERVER_PORT = "https://backend-boggle.herokuapp.com";
-  const SERVER_PORT = `http://localhost:9000`;
+  const SERVER_PORT = "https://backend-boggle.herokuapp.com";
+  // const SERVER_PORT = `http://localhost:9000`;
 
   function RenderJoin(props) {
     return (
