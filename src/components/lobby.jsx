@@ -83,11 +83,13 @@ const Lobby = (props) => {
   const [showgrid, setshowgrid] = useState(false);
   const [endgame, setEndgame] = useState(false);
   const [words, setWords] = useState("");
-  const [endtime, setendtime]  = useState(120);
+  const [endtime, setendtime]  = useState(20);
   let final_time = 120;
-   const ENDPOINT = `https://backend-boggle.herokuapp.com/rooms`;
-  // const ENDPOINT = `http://localhost:9000/rooms`;
+  //  const ENDPOINT = `https://backend-boggle.herokuapp.com/rooms`;
+  const ENDPOINT = `http://localhost:9000/rooms`;
   const classes = useStyles();
+  const [minlength, setminlength] = useState(3);
+  let min = 3;
   let [isBlocking, setIsBlocking] = useState(true);
   
 
@@ -115,13 +117,20 @@ const Lobby = (props) => {
       setHost(host);
     });
 
-    socket.on("sending_time", (time) => {
+   socket.on("sending_time", (time) => {
       console.log('getting called')
       console.log(time);
       setendtime(time);
-      console.log(endtime);
     });
 
+    socket.on("getmin_length", (min_length) => {
+      console.log('getting called')
+      console.log(min_length);
+      setminlength(min_length)
+    });
+
+
+   
     socket.on("starting_game", (data) => {
       if (data.start) {
         console.log('game is starting')
@@ -170,7 +179,17 @@ const Lobby = (props) => {
       submit_data();
       setCount(1);
     }
+    if(players.length > 0){
+    currentSocket.on("sending_time", (time) => {
+      console.log('getting called')
+      console.log(time);
+      setendtime(time);
+      console.log(endtime);
+    });
+  }
   }, [time]);
+
+
 
   //STARTS THE GAME
   const StartGame = (msg) => {
@@ -242,11 +261,8 @@ const Lobby = (props) => {
             ) : (
               ""
             )}
-            {score === score_array[2] ? (
-              <img
-                src="https://img.icons8.com/ios-filled/100/000000/medal-third-place.png"
-                alt=""
-              />
+            {score === score_array[2] && score !== score_array[1] ? (
+             <img src="https://img.icons8.com/ios-filled/100/000000/medal2-third-place.png"/>
             ) : (
               ""
             )}
@@ -257,19 +273,17 @@ const Lobby = (props) => {
   };
 
   const leaderboard = () => {
+   if(scores.length > 0){
     return (
       <ThemeProvider theme={theme}>
         <Typography variant="h3">
-          {scores.length > 0 ? (
             <strong>
               <h3>Leaderboard</h3>{" "}
             </strong>
-          ) : (
-            ""
-          )}
         </Typography>
       </ThemeProvider>
     );
+          }
   };
 
   //DISPLAYS SCORES
@@ -291,7 +305,7 @@ const Lobby = (props) => {
                 {scores.map((player) => (
                   <li>
                     <OverlayTrigger
-                    trigger="hover"
+                    trigger="click"
                     triger= "focus"
                     
                       
@@ -310,8 +324,11 @@ const Lobby = (props) => {
                               {player.words.map((word) => (
                                 <Grid key={word.word} item>
                                   <h6>
-                                    {word.word !== ""
-                                      ? `${word.word} - ${word.score}`
+                                    {word.word !== "" && word.common == true
+                                      ? <div class="container"><span className="strikethrough">{word.word} - {0}</span></div>
+                                      : ""}
+                                       {word.word !== "" && word.common == false
+                                      ? <div class="container">{word.word} - {word.score}</div>
                                       : ""}
                                   </h6>
                                 </Grid>
@@ -423,6 +440,7 @@ const Lobby = (props) => {
           <Typography variant="h3">
             Find Words!! Seconds Left: {endtime - time}
           </Typography>
+          minimum word length = {minlength}
         </ThemeProvider>
       );
     } else {
@@ -440,7 +458,9 @@ const Lobby = (props) => {
               onChange={(e) => {
                 setWords(e.target.value);
               }}
-              placeholder="enter your words here"
+              placeholder={`              type words here. 
+              min-length=${minlength}.
+              (space between words)`}
               rows="100"
               cols="20"
             ></textarea>
@@ -500,7 +520,7 @@ const Lobby = (props) => {
     }
     return (
       <div>
-       host-{host} code-{room} (Seeing an old page? Refresh) {leaderboard()}
+     {leaderboard()}
       </div>
     );
   };
@@ -518,103 +538,10 @@ const Lobby = (props) => {
 
       <Grid>
         {display_scores()}
-        <br />
       </Grid>
 
       <Grid container>
-        <Grid item xs={12}>
-          <Grid
-            container
-            direction="row-reverse"
-            justify="center"
-            alignItems="center"
-            spacing={3}
-          >
-            <Grid item>
-              <SpacingGrid
-                players={players}
-                gridshow={gridshow}
-                scores={scores}
-              ></SpacingGrid>
-            </Grid>
-          </Grid>
-        </Grid>
-
-        <Grid item xs={6}>
-          <Grid
-            container
-            direction="row-reverse"
-            justify="center"
-            alignItems="center"
-            spacing={0}
-          >
-            <Grid item>
-              {gridshow === false ? (
-                <div>
-                  <Button
-                    onClick={(e) => {
-                      StartGame(e);
-                    }}
-                  >
-                    {endgame === true ? "play again" : "start game"}
-                  </Button>
-                </div>
-              ) : (
-                ""
-              )}
-            </Grid>
-          </Grid>
-        </Grid>
-
-        <Grid item xs={6}>
-          <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-            spacing={0}
-          >
-            <Grid item>
-              {gridshow === false ? (
-                <div>
-                  <Form>
-                    <Form.Row className="align-items-center">
-                      <Col xs="auto" className="my-1">
-                        <Form.Label
-                          className="mr-sm-2"
-                          htmlFor="inlineFormCustomSelect"
-                          srOnly
-                        >
-                          Preference
-                        </Form.Label>
-                        <Form.Control
-                       onChange= {(e) => {
-                      final_time = e.target.value
-                        console.log(final_time)
-    currentSocket.emit('setting_time', ({host: name, time: final_time}))
-                      }}
-                          as="select"
-                          className="mr-sm-2"
-                          id="inlineFormCustomSelect"
-                          custom
-                        >
-                          <option value="20">Set Time...seconds (host only)</option>
-                          <option value="60">60</option>
-                          <option value="120">120</option>
-                          <option value="180">180</option>
-                        </Form.Control>
-                      </Col>
-                    </Form.Row>
-                  </Form>
-                </div>
-              ) : (
-                ""
-              )}
-            </Grid>
-          </Grid>
-        </Grid>
-
-        <Grid item xs={12}>
+      <Grid item xs={12}>
           <Grid
             container
             direction="row-reverse"
@@ -649,6 +576,119 @@ const Lobby = (props) => {
             <Grid item>{show_text()}</Grid>
           </Grid>
         </Grid>
+        
+        <Grid item xs={12}>
+          <Grid
+            container
+            direction="row-reverse"
+            justify="center"
+            alignItems="center"
+            spacing={3}
+          >
+            <Grid item>
+              <br/>
+              <SpacingGrid
+                players={players}
+                gridshow={gridshow}
+                scores={scores}
+              ></SpacingGrid>
+            </Grid>
+          </Grid>
+        </Grid>
+
+        <Grid item sm={6} xs={12}>
+          <Grid
+            container
+            direction="row-reverse"
+            justify="center"
+            alignItems="center"
+            spacing={0}
+          >
+            <Grid item>
+              {gridshow === false ? (
+                <div>
+                  <Button
+                    onClick={(e) => {
+                      StartGame(e);
+                    }}
+                  >
+                    {endgame === true ? "play again" : "start game"}
+                  </Button>
+                </div>
+              ) : (
+                ""
+              )}
+            </Grid>
+          </Grid>
+        </Grid>
+
+        <Grid item sm={6} xs={12}>
+          <Grid
+            container
+            direction="row-reverse"
+            justify="center"
+            alignItems="center"
+            spacing={1}
+          >
+            <Grid item>
+              {gridshow === false ? (
+                <div>
+                  <Form>
+                    <Form.Row className="align-items-center">
+                      <Col xs={6} className="my-1">
+                        <Form.Label
+                          className="mr-sm-2"
+                          htmlFor="inlineFormCustomSelect"
+                          srOnly
+                        >
+                          Preference
+                        </Form.Label>
+                        <Form.Control
+                       onChange= {(e) => {
+                      final_time = e.target.value
+                        console.log(final_time)
+    currentSocket.emit('setting_time', ({host: name, time: final_time}))
+                      }}
+                          as="select"
+                          className="mr-sm-2"
+                          id="inlineFormCustomSelect"
+                          custom
+                        >
+                          <option value="20">Time</option>
+                          <option value="60">60s</option>
+                          <option value="120">120s</option>
+                          <option value="180">180s</option>
+                        </Form.Control>
+                      </Col>
+                      <Col xs={6} className="my-1">
+                      <Form.Control
+                       onChange= {(e) => {
+                        min = e.target.value
+                        console.log(min)
+    currentSocket.emit('min_length', ({host: name, min_length: min}))
+                      }}
+                          as="select"
+                          className="mr-sm-2"
+                          id="inlineFormCustomSelect"
+                          custom
+                        >
+                          <option value="3">min length (default 3)</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                        </Form.Control>
+                        </Col>
+                    </Form.Row>
+                  </Form>
+                </div>
+              ) : (
+                ""
+              )}
+            </Grid>
+          </Grid>
+        </Grid>
+
+
       </Grid>
       <Prompt
         when={isBlocking}
