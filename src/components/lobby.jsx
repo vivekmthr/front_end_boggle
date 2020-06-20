@@ -305,7 +305,7 @@ const Lobby = (props) => {
                 {scores.map((player) => (
                   <li>
                     <OverlayTrigger
-                    trigger="click"
+                    trigger="hover"
                     triger= "focus"
                     
                       
