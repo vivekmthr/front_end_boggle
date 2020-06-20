@@ -23,8 +23,8 @@ const Landing = (props) => {
   let code = "";
   const [modalShow, setModalShow] = useState(false);
   const [modalShow1, setModalShow1] = useState(false);
-  // const SERVER_PORT = "https://backend-boggle.herokuapp.com";
-  const SERVER_PORT = `http://localhost:9000`;
+  const SERVER_PORT = "https://backend-boggle.herokuapp.com";
+  // const SERVER_PORT = `http://localhost:9000`;
   const [modalShow2, setModalShow2] = React.useState(false);
 
 
@@ -174,14 +174,6 @@ const Landing = (props) => {
       spacing={1}
     >
       <Container>
-        <Row>
-          <Col xs={{ offset: 3, span: 6 }}>
-            {" "}
-            <Button onClick={() => setModalShow2(true)} className="myButton">
-              Instructions
-            </Button>
-          </Col>
-        </Row>
 
         <Row>
           <Col xs={{ offset: 3, span: 6 }}>
@@ -191,13 +183,21 @@ const Landing = (props) => {
         </Row>
 
         <Row>
-          <Col sm={6} xs={6}>
+          <Col xs={4}>
             {" "}
             <Button onClick={() => setModalShow(true)} className="myButton">
               Join Game
             </Button>
           </Col>
-          <Col sm={6} xs={6}>
+         
+          <Col xs={4}>
+            {" "}
+            <Button onClick={() => setModalShow2(true)} className="myButton">
+              Instruction
+            </Button>
+          </Col>
+       
+          <Col xs={4}>
             {" "}
             <Button onClick={() => setModalShow1(true)} className="myButton">
               Create Game

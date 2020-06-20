@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/static/css/main.037ed421.chunk.css",
+    "main.js": "/static/js/main.eb7853c4.chunk.js",
+    "main.js.map": "/static/js/main.eb7853c4.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.98a2b520.js",
+    "runtime-main.js.map": "/static/js/runtime-main.98a2b520.js.map",
+    "static/css/2.af3c1da9.chunk.css": "/static/css/2.af3c1da9.chunk.css",
+    "static/js/2.6b739c87.chunk.js": "/static/js/2.6b739c87.chunk.js",
+    "static/js/2.6b739c87.chunk.js.map": "/static/js/2.6b739c87.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.838e495846203292f1195f1636694112.js": "/precache-manifest.838e495846203292f1195f1636694112.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.af3c1da9.chunk.css.map": "/static/css/2.af3c1da9.chunk.css.map",
+    "static/css/main.037ed421.chunk.css.map": "/static/css/main.037ed421.chunk.css.map",
+    "static/js/2.6b739c87.chunk.js.LICENSE.txt": "/static/js/2.6b739c87.chunk.js.LICENSE.txt",
+    "static/media/landing.css": "/static/media/phone_landing.f5bd3c8e.png",
+    "static/media/lobby.css": "/static/media/phone_lobby.01c916e9.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.98a2b520.js",
+    "static/css/2.af3c1da9.chunk.css",
+    "static/js/2.6b739c87.chunk.js",
+    "static/css/main.037ed421.chunk.css",
+    "static/js/main.eb7853c4.chunk.js"
+  ]
+}
