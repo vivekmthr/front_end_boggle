@@ -174,14 +174,15 @@ const Landing = (props) => {
       spacing={1}
     >
       <Container>
-
+   
         <Row>
-          <Col xs={{ offset: 3, span: 6 }}>
+          <Col sm={{ offset: 4, span: 4 }}  xs={{ offset: 2, span: 9 }}>
             {" "}
             <h1 classname="header">Online Boggle!!</h1>
           </Col>
+       
         </Row>
-
+        <br/>
         <Row>
           <Col xs={4}>
             {" "}
@@ -193,7 +194,7 @@ const Landing = (props) => {
           <Col xs={4}>
             {" "}
             <Button onClick={() => setModalShow2(true)} className="myButton">
-              Instruction
+              Instructions
             </Button>
           </Col>
        
